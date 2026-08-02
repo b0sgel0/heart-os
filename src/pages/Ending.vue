@@ -1,11 +1,5 @@
 <template>
-  <DefaultLayout>
-    <div class="flex min-h-screen items-center justify-center">
-      <h1 class="text-5xl font-bold">Ending Page</h1>
-    </div>
-  </DefaultLayout>
+  <div>
+    <h1>Ending</h1>
+  </div>
 </template>
-
-<script setup>
-import DefaultLayout from '@/layouts/DefaultLayout.vue'
-</script>
