@@ -1,10 +1,11 @@
 <template>
   <AppText center>
     Some memories deserve more than words.
+    <br />
     They deserve a place to live forever.
   </AppText>
 </template>
 
 <script setup>
-import AppText from '@/components/ui/AppText.vue'
+import AppText from "@/components/ui/AppText.vue";
 </script>

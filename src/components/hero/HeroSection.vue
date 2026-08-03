@@ -1,5 +1,6 @@
 <template>
-  <section class="hero">
+
+<section class="hero">
 
     <HeroTitle />
 
@@ -9,14 +10,17 @@
 
     <HeroScrollIndicator />
 
-  </section>
+</section>
+
 </template>
 
 <script setup>
-import HeroTitle from './HeroTitle.vue'
-import HeroSubtitle from './HeroSubtitle.vue'
-import HeroActions from './HeroActions.vue'
-import HeroScrollIndicator from './HeroScrollIndicator.vue'
+
+import HeroTitle from "./HeroTitle.vue";
+import HeroSubtitle from "./HeroSubtitle.vue";
+import HeroActions from "./HeroActions.vue";
+import HeroScrollIndicator from "./HeroScrollIndicator.vue";
+
 </script>
 
 <style scoped>
@@ -35,7 +39,7 @@ align-items:center;
 
 text-align:center;
 
-gap:24px;
+gap:30px;
 
 }
 

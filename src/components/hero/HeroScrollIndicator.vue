@@ -1,33 +1,51 @@
 <template>
   <div class="scroll">
-    Scroll
-    <span>↓</span>
+    <span>Scroll</span>
+
+    <div class="mouse">
+      <div class="wheel"></div>
+    </div>
   </div>
 </template>
 
 <style scoped>
 .scroll{
-  margin-top:80px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:8px;
-  color:var(--muted);
-  font-size:.9rem;
+display:flex;
+flex-direction:column;
+align-items:center;
+gap:14px;
+margin-top:70px;
+color:var(--muted);
 }
 
-.scroll span{
-  animation:bounce 2s infinite;
+.mouse{
+width:28px;
+height:44px;
+border:2px solid rgba(255,255,255,.3);
+border-radius:999px;
+display:flex;
+justify-content:center;
+padding-top:8px;
 }
 
-@keyframes bounce{
+.wheel{
+width:4px;
+height:8px;
+border-radius:999px;
+background:white;
+animation:wheel 2s infinite;
+}
 
-0%,100%{
+@keyframes wheel{
+
+0%{
 transform:translateY(0);
+opacity:1;
 }
 
-50%{
-transform:translateY(8px);
+100%{
+transform:translateY(12px);
+opacity:0;
 }
 
 }
