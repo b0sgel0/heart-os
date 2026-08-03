@@ -5,7 +5,7 @@ export default [
     title: "First Meet",
     date: "15 January 2023",
     description: "The day everything began.",
-    image: "/images/I.jpg",
+    image: "/images/IMG-20250628-WA0002.jpg",
     color: "#ff4d8d"
   },
   {
@@ -14,7 +14,7 @@ export default [
     title: "First Chat",
     date: "20 January 2023",
     description: "A simple message changed everything.",
-    image: "/images/I.jpg",
+    image: "/images/IMG-20250914-WA0004.jpg",
     color: "#8b5cf6"
   },
   {

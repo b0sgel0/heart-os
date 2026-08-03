@@ -1,8 +1,14 @@
 <script setup>
 import { ref } from "vue";
+
+import { useReveal } from "@/composables/useReveal";
+
 import memories from "@/data/memories";
+
 import MemoryCard from "./MemoryCard.vue";
 import MemoryModal from "./MemoryModal.vue";
+
+useReveal(".timeline-item");
 
 const selectedMemory = ref(null);
 
@@ -20,7 +26,7 @@ function closeMemory() {
 
     <div
       v-for="item in memories"
-      :key="item.title"
+      :key="item.id"
       class="timeline-item"
     >
       <div class="dot"></div>
@@ -32,82 +38,68 @@ function closeMemory() {
 
     </div>
 
-  </section>
+    <MemoryModal
+      :memory="selectedMemory"
+      @close="closeMemory"
+    />
 
-  <!-- TAMBAHKAN INI -->
-  <MemoryModal
-    :memory="selectedMemory"
-    @close="closeMemory"
-  />
+  </section>
 </template>
 
 <style scoped>
 
 .timeline{
+  position:relative;
 
-position:relative;
+  max-width:900px;
 
-max-width:900px;
+  margin:0 auto 140px;
 
-margin:0 auto 140px;
-
-padding-left:60px;
-
+  padding-left:60px;
 }
 
 .timeline::before{
+  content:"";
 
-content:"";
+  position:absolute;
 
-position:absolute;
+  left:18px;
 
-left:18px;
+  top:0;
+  bottom:0;
 
-top:0;
+  width:2px;
 
-bottom:0;
-
-width:2px;
-
-background:
-
-linear-gradient(
-180deg,
-#ff4d8d,
-#8b5cf6,
-#67e8f9
-);
-
+  background:linear-gradient(
+    180deg,
+    #ff4d8d,
+    #8b5cf6,
+    #67e8f9
+  );
 }
 
 .timeline-item{
+  position:relative;
 
-position:relative;
-
-margin-bottom:48px;
-
+  margin-bottom:48px;
 }
 
 .dot{
+  position:absolute;
 
-position:absolute;
+  left:-51px;
 
-left:-51px;
+  top:42px;
 
-top:38px;
+  width:16px;
+  height:16px;
 
-width:16px;
+  border-radius:50%;
 
-height:16px;
+  background:#ff4d8d;
 
-border-radius:50%;
-
-background:#ff4d8d;
-
-box-shadow:
-
-0 0 20px rgba(255,77,141,.7);
-
+  box-shadow:
+    0 0 20px rgba(255,77,141,.7);
 }
 
 </style>
