@@ -1,17 +1,24 @@
+<script setup>
+import { useRouter } from "vue-router";
+import AppButton from "@/components/ui/AppButton.vue";
+
+const router = useRouter();
+
+function enterHeart() {
+  router.push("/boot");
+}
+</script>
+
 <template>
   <div class="actions">
-    <AppButton>
+    <AppButton @click="enterHeart">
       Enter Heart →
     </AppButton>
   </div>
 </template>
 
-<script setup>
-import AppButton from "@/components/ui/AppButton.vue";
-</script>
-
 <style scoped>
-.actions{
-    margin-top:18px;
+.actions {
+  margin-top: 18px;
 }
 </style>

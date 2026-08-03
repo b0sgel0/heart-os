@@ -1,5 +1,26 @@
+<script setup>
+import { ref, onMounted, onBeforeUnmount } from "vue";
+
+const aurora = ref(null);
+
+const handleMouseMove = (e) => {
+  const x = (e.clientX / window.innerWidth - 0.5) * 30;
+  const y = (e.clientY / window.innerHeight - 0.5) * 30;
+
+  aurora.value?.style.setProperty("--x", `${x}px`);
+  aurora.value?.style.setProperty("--y", `${y}px`);
+};
+
+onMounted(() => {
+  window.addEventListener("mousemove", handleMouseMove);
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener("mousemove", handleMouseMove);
+});
+</script>
 <template>
-  <div class="aurora">
+  <div ref="aurora" class="aurora">
     <div class="blob blob-1"></div>
     <div class="blob blob-2"></div>
     <div class="blob blob-3"></div>
@@ -7,12 +28,19 @@
 </template>
 
 <style scoped>
-.aurora {
+.aurora{
   position: fixed;
   inset: 0;
   overflow: hidden;
   z-index: -1;
+
   background: var(--bg);
+
+  --x: 0px;
+  --y: 0px;
+
+  transform: translate(var(--x), var(--y));
+  transition: transform .35s ease-out;
 }
 
 .blob {
@@ -22,6 +50,9 @@
   border-radius: 50%;
   filter: blur(120px);
   opacity: .45;
+
+  will-change: transform;
+
   animation: float 16s ease-in-out infinite;
 }
 

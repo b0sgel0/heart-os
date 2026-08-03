@@ -1,30 +1,108 @@
+<script setup>
+defineEmits(["open"]);
+
+defineProps({
+  title: String,
+  date: String,
+  emoji: String,
+  description: String,
+  image: String,
+});
+</script>
+
 <template>
-  <article
-    class="overflow-hidden rounded-3xl border border-zinc-800 bg-zinc-900 shadow-lg transition duration-300 hover:-translate-y-1 hover:shadow-2xl"
-  >
+  <article class="card" @click="$emit('open')">
+
     <img
-      :src="memory.image"
-      :alt="memory.title"
-      class="h-64 w-full object-cover"
+      :src="image"
+      :alt="title"
+      class="thumbnail"
     />
 
-    <div class="space-y-3 p-6">
-      <h2 class="text-2xl font-bold text-white">
-        {{ memory.title }}
-      </h2>
-
-      <p class="text-zinc-400">
-        {{ memory.description }}
-      </p>
+    <div class="emoji">
+      {{ emoji }}
     </div>
+
+    <h3>{{ title }}</h3>
+
+    <small>{{ date }}</small>
+
+    <p>{{ description }}</p>
+
   </article>
 </template>
 
-<script setup>
-defineProps({
-  memory: {
-    type: Object,
-    required: true,
-  },
-});
-</script>
+<style scoped>
+.card{
+  background: rgba(255,255,255,.05);
+  backdrop-filter: blur(24px);
+
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:24px;
+
+  padding:32px;
+
+  cursor:pointer;
+
+  transition:
+    transform .35s,
+    border-color .35s,
+    box-shadow .35s;
+}
+
+.card:hover{
+
+transform:
+
+translateY(-6px)
+
+scale(1.01);
+
+border-color:#ff4d8d;
+
+box-shadow:
+
+0 20px 60px rgba(255,77,141,.18);
+
+}
+
+
+.emoji{
+  font-size:2rem;
+  margin-bottom:16px;
+}
+
+h3{
+  margin-bottom:8px;
+}
+
+small{
+  color:#999;
+}
+
+p{
+  margin-top:16px;
+  color:#bdbdbd;
+  line-height:1.7;
+}
+
+.thumbnail{
+  width:100%;
+  height:220px;
+
+  object-fit:cover;
+
+  border-radius:18px;
+
+  margin-bottom:22px;
+
+  transition:
+    transform .5s ease,
+    filter .5s ease;
+}
+
+.card:hover .thumbnail{
+  transform:scale(1.05);
+  filter:brightness(1.05);
+}
+</style>
