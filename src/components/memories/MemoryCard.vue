@@ -1,4 +1,8 @@
 <script setup>
+import { useTilt } from "@/composables/useTilt";
+
+useTilt(".card");
+
 defineEmits(["open"]);
 
 defineProps({
@@ -35,35 +39,32 @@ defineProps({
 <style scoped>
 .card{
   background: rgba(255,255,255,.05);
+
   backdrop-filter: blur(24px);
 
   border:1px solid rgba(255,255,255,.08);
+
   border-radius:24px;
 
   padding:32px;
 
   cursor:pointer;
 
+  transform-style: preserve-3d;
+
+  will-change: transform;
+
   transition:
-    transform .35s,
+    transform .25s ease,
     border-color .35s,
     box-shadow .35s;
 }
 
 .card:hover{
+  border-color:#ff4d8d;
 
-transform:
-
-translateY(-6px)
-
-scale(1.01);
-
-border-color:#ff4d8d;
-
-box-shadow:
-
-0 20px 60px rgba(255,77,141,.18);
-
+  box-shadow:
+    0 20px 60px rgba(255,77,141,.18);
 }
 
 
