@@ -1,13 +1,13 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 // Pages
-import Intro from '../pages/Intro.vue'
-import Boot from '../pages/Boot.vue'
-import Decrypt from '../pages/Decrypt.vue'
-import Letter from '../pages/Letter.vue'
-import Memories from '../pages/Memories.vue'
-import Ending from '../pages/Ending.vue'
+import Intro from "../pages/Intro.vue";
+import Boot from "../pages/Boot.vue";
+import Decrypt from "../pages/Decrypt.vue";
+import Letter from "../pages/Letter.vue";
+import Memories from "../pages/Memories.vue";
 import MemoryDetail from "../pages/MemoryDetail.vue";
+import Ending from "../pages/Ending.vue";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -32,11 +32,21 @@ const router = createRouter({
       name: 'Letter',
       component: Letter,
     },
-    {
-      path: '/memories',
-      name: 'Memories',
-      component: Memories,
-    },
+  {
+  path: "/memories",
+  name: "Memories",
+  component: Memories,
+},
+{
+  path: "/memories/:id",
+  name: "MemoryDetail",
+  component: MemoryDetail,
+},
+{
+  path: "/ending",
+  name: "Ending",
+  component: Ending,
+},
     {
       path: '/ending',
       name: 'Ending',

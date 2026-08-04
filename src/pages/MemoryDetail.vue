@@ -10,48 +10,69 @@ const router = useRouter();
 
 const memory = computed(() =>
   memories.find(
-    (item) => item.id === Number(route.params.id)
+    item => item.id === Number(route.params.id)
   )
 );
 </script>
 
 <template>
-  <AppContainer v-if="memory">
+  <AppContainer>
 
-    <button
-      class="back"
-      @click="router.back()"
-    >
-      ← Back
-    </button>
+    <div v-if="memory">
 
-    <img
-      :src="memory.image"
-      :alt="memory.title"
-      class="cover"
-    />
+      <button
+        class="back"
+        @click="router.back()"
+      >
+        ← Back
+      </button>
 
-    <h1>
-      {{ memory.emoji }}
-      {{ memory.title }}
-    </h1>
+      <img
+        :src="memory.image"
+        :alt="memory.title"
+        class="cover"
+      />
 
-    <p class="subtitle">
-      {{ memory.subtitle }}
-    </p>
+      <h1>
+        {{ memory.emoji }}
+        {{ memory.title }}
+      </h1>
 
-    <div class="meta">
-      <span>📅 {{ memory.date }}</span>
-      <span>📍 {{ memory.location }}</span>
+      <p class="subtitle">
+        {{ memory.subtitle }}
+      </p>
 
-      <span v-if="memory.favorite">
-        ❤️ Favorite
-      </span>
+      <div class="meta">
+
+        <span>📅 {{ memory.date }}</span>
+
+        <span>📍 {{ memory.location }}</span>
+
+        <span v-if="memory.favorite">
+          ❤️ Favorite
+        </span>
+
+      </div>
+
+      <article class="description">
+        {{ memory.description }}
+      </article>
+
     </div>
 
-    <article class="description">
-      {{ memory.description }}
-    </article>
+    <div
+      v-else
+      class="not-found"
+    >
+      <h2>Memory not found 😢</h2>
+
+      <button
+        class="back"
+        @click="router.push('/memories')"
+      >
+        Back
+      </button>
+    </div>
 
   </AppContainer>
 </template>
@@ -59,8 +80,6 @@ const memory = computed(() =>
 <style scoped>
 
 .back{
-
-margin-bottom:24px;
 
 padding:12px 22px;
 
@@ -70,7 +89,9 @@ border-radius:999px;
 
 cursor:pointer;
 
-background:#222;
+margin-bottom:28px;
+
+background:#202020;
 
 color:white;
 
@@ -86,7 +107,7 @@ object-fit:cover;
 
 border-radius:24px;
 
-margin-bottom:28px;
+margin-bottom:30px;
 
 }
 
@@ -100,9 +121,9 @@ margin-bottom:10px;
 
 .subtitle{
 
-color:#9ca3af;
+color:#a1a1aa;
 
-margin-bottom:20px;
+margin-bottom:24px;
 
 }
 
@@ -114,9 +135,9 @@ gap:20px;
 
 flex-wrap:wrap;
 
-margin-bottom:30px;
+margin-bottom:32px;
 
-color:#cbd5e1;
+color:#d1d5db;
 
 }
 
@@ -124,9 +145,17 @@ color:#cbd5e1;
 
 line-height:2;
 
-font-size:1.1rem;
-
 white-space:pre-line;
+
+font-size:1.08rem;
+
+}
+
+.not-found{
+
+text-align:center;
+
+padding:80px 0;
 
 }
 
@@ -141,6 +170,14 @@ height:220px;
 h1{
 
 font-size:2rem;
+
+}
+
+.meta{
+
+flex-direction:column;
+
+gap:10px;
 
 }
 

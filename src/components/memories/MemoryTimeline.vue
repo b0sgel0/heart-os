@@ -1,24 +1,15 @@
 <script setup>
-import { ref } from "vue";
+
 
 import { useReveal } from "@/composables/useReveal";
 
 import memories from "@/data/memories";
 
 import MemoryCard from "./MemoryCard.vue";
-import MemoryModal from "./MemoryModal.vue";
+
 
 useReveal(".timeline-item");
 
-const selectedMemory = ref(null);
-
-function openMemory(memory) {
-  selectedMemory.value = memory;
-}
-
-function closeMemory() {
-  selectedMemory.value = null;
-}
 </script>
 
 <template>
@@ -32,16 +23,11 @@ function closeMemory() {
       <div class="dot"></div>
 
       <MemoryCard
-        v-bind="item"
-        @open="openMemory(item)"
-      />
+  v-bind="item"
+/>
 
     </div>
 
-    <MemoryModal
-      :memory="selectedMemory"
-      @close="closeMemory"
-    />
 
   </section>
 </template>
