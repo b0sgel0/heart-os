@@ -1,19 +1,40 @@
 <template>
-  <div class="container">
+  <main class="container">
     <slot />
-  </div>
+  </main>
 </template>
 
 <style scoped>
 .container{
-  width:min(1200px,calc(100% - 48px));
-  margin-inline:auto;
+  width:min(1200px,100%);
+  margin:0 auto;
+
+  padding:40px;
+
+  min-height:100vh;
 }
 
-@media (max-width:768px){
+/* Tablet */
+@media (max-width:1023px){
 
 .container{
-width:calc(100% - 32px);
+
+padding:32px 24px;
+
+}
+
+}
+
+/* Mobile */
+@media (max-width:767px){
+
+.container{
+
+padding:
+env(safe-area-inset-top,20px)
+20px
+env(safe-area-inset-bottom,20px);
+
 }
 
 }

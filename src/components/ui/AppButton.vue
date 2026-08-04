@@ -19,6 +19,12 @@
   border-radius:999px;
   cursor:pointer;
 
+  min-height:52px;
+
+padding:16px 30px;
+
+touch-action:manipulation;
+
   position:relative;
   overflow:hidden;
 
@@ -65,6 +71,16 @@ box-shadow:
 
 .button:hover::before{
   transform:translateX(120%);
+}
+
+@media (max-width:767px){
+
+.button{
+
+width:100%;
+
+}
+
 }
 
 </style>

@@ -102,4 +102,25 @@ function closeMemory() {
     0 0 20px rgba(255,77,141,.7);
 }
 
+@media (max-width:767px){
+
+.timeline{
+
+padding-left:24px;
+
+}
+
+.timeline::before{
+
+left:8px;
+
+}
+
+.dot{
+
+left:-21px;
+
+}
+
+}
 </style>

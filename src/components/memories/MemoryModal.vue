@@ -253,4 +253,44 @@ transform:scale(.96);
 
 }
 
+@media (max-width:767px){
+
+.modal{
+
+width:100%;
+
+max-height:90vh;
+
+overflow:auto;
+
+}
+
+.cover{
+
+height:240px;
+
+}
+
+.content{
+
+padding:22px;
+
+}
+
+.meta{
+
+flex-direction:column;
+
+gap:8px;
+
+}
+
+.close{
+
+width:100%;
+
+}
+
+}
+
 </style>

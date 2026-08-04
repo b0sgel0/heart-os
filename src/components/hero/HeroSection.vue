@@ -125,4 +125,71 @@ onMounted(() => {
   gap:28px;
   text-align:center;
 }
+
+/* =========================
+   Tablet
+========================= */
+
+@media (max-width:1023px){
+
+.hero{
+
+padding:80px 24px;
+
+}
+
+}
+
+/* =========================
+   Mobile
+========================= */
+
+@media (max-width:767px){
+
+.hero{
+
+min-height:100vh;
+
+padding:
+env(safe-area-inset-top,32px)
+20px
+env(safe-area-inset-bottom,32px);
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+text-align:center;
+
+}
+
+.hero-content{
+
+width:100%;
+
+}
+
+.hero h1{
+
+font-size:clamp(2.5rem,10vw,4rem);
+
+}
+
+.hero p{
+
+font-size:1rem;
+
+line-height:1.8;
+
+}
+
+.actions{
+
+justify-content:center;
+
+}
+
+}
 </style>

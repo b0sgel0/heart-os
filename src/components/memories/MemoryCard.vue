@@ -46,7 +46,7 @@ defineProps({
 
   border-radius:24px;
 
-  padding:32px;
+  padding:24px;
 
   cursor:pointer;
 
@@ -105,5 +105,29 @@ p{
 .card:hover .thumbnail{
   transform:scale(1.05);
   filter:brightness(1.05);
+}
+
+@media (max-width:767px){
+
+.thumbnail{
+
+height:180px;
+
+}
+
+.card{
+
+padding:20px;
+
+border-radius:18px;
+
+}
+
+h3{
+
+font-size:1.1rem;
+
+}
+
 }
 </style>
