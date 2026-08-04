@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, onBeforeUnmount } from "vue";
+import { watch, onMounted, onBeforeUnmount } from "vue";
 
 const props = defineProps({
   memory: {
@@ -15,10 +15,26 @@ function close() {
 }
 
 function handleKeydown(e) {
-  if (e.key === "Escape") {
+  if (e.key === "Escape" && props.memory) {
     close();
   }
 }
+
+/*
+|--------------------------------------------------------------------------
+| Lock body scroll ONLY when modal is open
+|--------------------------------------------------------------------------
+*/
+
+watch(
+  () => props.memory,
+  (value) => {
+    document.body.style.overflow = value ? "hidden" : "";
+  },
+  {
+    immediate: true,
+  }
+);
 
 onMounted(() => {
   window.addEventListener("keydown", handleKeydown);
@@ -26,6 +42,7 @@ onMounted(() => {
 
 onBeforeUnmount(() => {
   window.removeEventListener("keydown", handleKeydown);
+  document.body.style.overflow = "";
 });
 </script>
 
@@ -52,11 +69,9 @@ onBeforeUnmount(() => {
               {{ memory.emoji }}
             </span>
 
-            <div>
+            <div class="heading">
 
-              <h2>
-                {{ memory.title }}
-              </h2>
+              <h2>{{ memory.title }}</h2>
 
               <p class="subtitle">
                 {{ memory.subtitle }}
@@ -102,50 +117,63 @@ onBeforeUnmount(() => {
 <style scoped>
 
 .overlay{
-  position:fixed;
-  inset:0;
+position:fixed;
+inset:0;
 
-  display:flex;
-  justify-content:center;
-  align-items:center;
+display:flex;
+justify-content:center;
+align-items:center;
 
-  padding:40px;
+padding:24px;
 
-  background:rgba(0,0,0,.75);
-  backdrop-filter:blur(20px);
+background:rgba(0,0,0,.78);
 
-  z-index:999;
+backdrop-filter:blur(18px);
+
+z-index:9999;
 }
 
 .modal{
 
-width:min(950px,100%);
+width:min(900px,100%);
+max-height:90vh;
 
-overflow:hidden;
-
-border-radius:28px;
+overflow-y:auto;
 
 background:#101014;
 
+border-radius:28px;
+
 border:1px solid rgba(255,255,255,.08);
 
-box-shadow:0 30px 100px rgba(0,0,0,.45);
+box-shadow:0 30px 80px rgba(0,0,0,.45);
 
+}
+
+.modal::-webkit-scrollbar{
+width:8px;
+}
+
+.modal::-webkit-scrollbar-thumb{
+background:#555;
+border-radius:999px;
 }
 
 .cover{
 
 width:100%;
 
-height:420px;
+height:300px;
 
 object-fit:cover;
+
+display:block;
 
 }
 
 .content{
 
-padding:36px;
+padding:34px;
 
 }
 
@@ -157,7 +185,7 @@ gap:18px;
 
 align-items:center;
 
-margin-bottom:26px;
+margin-bottom:24px;
 
 }
 
@@ -167,9 +195,15 @@ font-size:3rem;
 
 }
 
-.subtitle{
+.heading h2{
 
-margin-top:6px;
+font-size:2.2rem;
+
+margin-bottom:6px;
+
+}
+
+.subtitle{
 
 color:#9ca3af;
 
@@ -181,9 +215,13 @@ display:flex;
 
 flex-wrap:wrap;
 
-gap:14px;
+gap:18px;
 
-margin-bottom:24px;
+margin:24px 0;
+
+padding-bottom:18px;
+
+border-bottom:1px solid rgba(255,255,255,.08);
 
 color:#cbd5e1;
 
@@ -201,15 +239,17 @@ font-weight:600;
 
 line-height:1.9;
 
+white-space:pre-line;
+
 color:#d1d5db;
 
 }
 
 .close{
 
-margin-top:30px;
+margin-top:32px;
 
-padding:14px 24px;
+padding:14px 28px;
 
 border:none;
 
@@ -233,14 +273,14 @@ transition:.3s;
 
 .close:hover{
 
-transform:translateY(-2px);
+transform:translateY(-3px);
 
 }
 
 .modal-enter-active,
 .modal-leave-active{
 
-transition:.35s;
+transition:.35s ease;
 
 }
 
@@ -249,25 +289,33 @@ transition:.35s;
 
 opacity:0;
 
-transform:scale(.96);
+transform:scale(.95);
 
 }
 
-@media (max-width:767px){
+@media(max-width:768px){
+
+.overlay{
+
+padding:12px;
+
+align-items:flex-end;
+
+}
 
 .modal{
 
 width:100%;
 
-max-height:90vh;
+max-height:92vh;
 
-overflow:auto;
+border-radius:22px 22px 0 0;
 
 }
 
 .cover{
 
-height:240px;
+height:220px;
 
 }
 
@@ -277,11 +325,23 @@ padding:22px;
 
 }
 
+.top{
+
+align-items:flex-start;
+
+}
+
+.heading h2{
+
+font-size:1.8rem;
+
+}
+
 .meta{
 
 flex-direction:column;
 
-gap:8px;
+gap:10px;
 
 }
 

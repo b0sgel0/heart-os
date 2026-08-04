@@ -1,11 +1,14 @@
 <script setup>
 import { useTilt } from "@/composables/useTilt";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
 
 useTilt(".card");
 
-defineEmits(["open"]);
 
 defineProps({
+  id: Number,
   title: String,
   date: String,
   emoji: String,
@@ -15,8 +18,10 @@ defineProps({
 </script>
 
 <template>
-  <article class="card" @click="$emit('open')">
-
+  <article
+    class="card"
+    @click="router.push(`/memories/${id}`)"
+  >
     <img
       :src="image"
       :alt="title"
@@ -32,7 +37,6 @@ defineProps({
     <small>{{ date }}</small>
 
     <p>{{ description }}</p>
-
   </article>
 </template>
 

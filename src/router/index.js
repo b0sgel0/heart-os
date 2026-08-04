@@ -7,6 +7,7 @@ import Decrypt from '../pages/Decrypt.vue'
 import Letter from '../pages/Letter.vue'
 import Memories from '../pages/Memories.vue'
 import Ending from '../pages/Ending.vue'
+import MemoryDetail from "../pages/MemoryDetail.vue";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -41,6 +42,11 @@ const router = createRouter({
       name: 'Ending',
       component: Ending,
     },
+    {
+  path: "/memories/:id",
+  name: "MemoryDetail",
+  component: MemoryDetail,
+},
     {
       path: '/:pathMatch(.*)*',
       redirect: '/',
