@@ -11,12 +11,15 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
+import { useMusicStore } from "@/stores/music";
 
 import BootHeader from "./BootHeader.vue";
 import BootProgress from "./BootProgress.vue";
 import BootLog from "./BootLog.vue";
 
 const router = useRouter();
+
+const music = useMusicStore();
 
 const progress = ref(0);
 const logs = ref([]);
@@ -47,9 +50,11 @@ onMounted(() => {
      if (progress.value >= 100) {
      clearInterval(interval);
 
-     setTimeout(() => {
-     router.push("/memories");
-     }, 1000);
+     setTimeout(async () => {
+  await music.play();
+
+  router.push("/memories");
+}, 1000);
      }
   }, 60);
 });

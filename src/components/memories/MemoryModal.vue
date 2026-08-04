@@ -41,26 +41,52 @@ onBeforeUnmount(() => {
         <img
           :src="memory.image"
           :alt="memory.title"
-          class="hero-image"
+          class="cover"
         />
 
         <div class="content">
 
-          <span class="date">
-            {{ memory.date }}
-          </span>
+          <div class="top">
 
-          <h2>
-            {{ memory.emoji }}
-            {{ memory.title }}
-          </h2>
+            <span class="emoji">
+              {{ memory.emoji }}
+            </span>
 
-          <p>
+            <div>
+
+              <h2>
+                {{ memory.title }}
+              </h2>
+
+              <p class="subtitle">
+                {{ memory.subtitle }}
+              </p>
+
+            </div>
+
+          </div>
+
+          <div class="meta">
+
+            <span>📅 {{ memory.date }}</span>
+
+            <span>📍 {{ memory.location }}</span>
+
+            <span
+              v-if="memory.favorite"
+              class="favorite"
+            >
+              ❤️ Favorite
+            </span>
+
+          </div>
+
+          <p class="description">
             {{ memory.description }}
           </p>
 
           <button
-            class="close-btn"
+            class="close"
             @click="close"
           >
             Close
@@ -85,34 +111,33 @@ onBeforeUnmount(() => {
 
   padding:40px;
 
-  background:rgba(0,0,0,.72);
-  backdrop-filter:blur(18px);
+  background:rgba(0,0,0,.75);
+  backdrop-filter:blur(20px);
 
   z-index:999;
 }
 
 .modal{
 
-width:min(900px,100%);
-
-background:rgba(20,20,25,.96);
-
-border:1px solid rgba(255,255,255,.08);
-
-border-radius:28px;
+width:min(950px,100%);
 
 overflow:hidden;
 
-box-shadow:
-0 40px 100px rgba(0,0,0,.45);
+border-radius:28px;
+
+background:#101014;
+
+border:1px solid rgba(255,255,255,.08);
+
+box-shadow:0 30px 100px rgba(0,0,0,.45);
 
 }
 
-.hero-image{
+.cover{
 
 width:100%;
 
-height:380px;
+height:420px;
 
 object-fit:cover;
 
@@ -124,39 +149,67 @@ padding:36px;
 
 }
 
-.date{
+.top{
 
-display:block;
+display:flex;
 
-margin-bottom:10px;
+gap:18px;
 
-color:#999;
+align-items:center;
 
-font-size:.9rem;
-
-}
-
-h2{
-
-font-size:2rem;
-
-margin-bottom:20px;
+margin-bottom:26px;
 
 }
 
-p{
+.emoji{
 
-line-height:1.8;
+font-size:3rem;
+
+}
+
+.subtitle{
+
+margin-top:6px;
+
+color:#9ca3af;
+
+}
+
+.meta{
+
+display:flex;
+
+flex-wrap:wrap;
+
+gap:14px;
+
+margin-bottom:24px;
+
+color:#cbd5e1;
+
+}
+
+.favorite{
+
+color:#ff4d8d;
+
+font-weight:600;
+
+}
+
+.description{
+
+line-height:1.9;
 
 color:#d1d5db;
 
 }
 
-.close-btn{
+.close{
 
-margin-top:32px;
+margin-top:30px;
 
-padding:14px 26px;
+padding:14px 24px;
 
 border:none;
 
@@ -178,7 +231,7 @@ transition:.3s;
 
 }
 
-.close-btn:hover{
+.close:hover{
 
 transform:translateY(-2px);
 
@@ -195,7 +248,8 @@ transition:.35s;
 .modal-leave-to{
 
 opacity:0;
-transform:scale(.95);
+
+transform:scale(.96);
 
 }
 
