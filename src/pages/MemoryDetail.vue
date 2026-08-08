@@ -37,6 +37,12 @@ const nextMemory = computed(() => {
   return memories[currentIndex.value + 1];
 });
 
+const isLastMemory = computed(() => {
+  return (
+    currentIndex.value === memories.length - 1
+  );
+});
+
 const themeStyle = computed(() => {
   if (!memory.value) return {};
 
@@ -153,22 +159,34 @@ const themeStyle = computed(() => {
 
         <!-- NEXT -->
         <button
-          v-if="nextMemory"
-          class="nav-card next"
-          @click="
-            router.push(`/memories/${nextMemory.id}`)
-          "
-        >
+  v-if="nextMemory"
+  class="nav-card next"
+  @click="
+    router.push(`/memories/${nextMemory.id}`)
+  "
+>
+  <small>
+    Next →
+  </small>
 
-          <small>
-            Next →
-          </small>
+  <strong>
+    {{ nextMemory.title }}
+  </strong>
+</button>
 
-          <strong>
-            {{ nextMemory.title }}
-          </strong>
+<button
+  v-else-if="isLastMemory"
+  class="nav-card ending-card"
+  @click="router.push('/ending')"
+>
+  <small>
+    Continue →
+  </small>
 
-        </button>
+  <strong>
+    The Final Chapter ❤️
+  </strong>
+</button>
 
       </nav>
 
@@ -880,6 +898,45 @@ const themeStyle = computed(() => {
     display: none;
   }
 
+}
+
+.ending-card {
+  background:
+    linear-gradient(
+      135deg,
+      color-mix(
+        in srgb,
+        var(--theme-a) 12%,
+        rgba(255, 255, 255, .04)
+      ),
+      color-mix(
+        in srgb,
+        var(--theme-b) 8%,
+        rgba(255, 255, 255, .03)
+      )
+    );
+
+  border-color:
+    color-mix(
+      in srgb,
+      var(--theme-a) 30%,
+      rgba(255, 255, 255, .08)
+    );
+}
+
+.ending-card small {
+  color:
+    var(--theme-a);
+}
+
+.ending-card:hover {
+  box-shadow:
+    0 20px 50px
+    color-mix(
+      in srgb,
+      var(--theme-a) 22%,
+      transparent
+    );
 }
 
 
