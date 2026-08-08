@@ -1,11 +1,17 @@
 import { defineStore } from "pinia";
-
 import bgMusic from "@/assets/audio/NUCA - MASA INI, NANTI, DAN MASA INDAH LAINNYA (OFFICIAL LYRIC VIDEO) - Nuca.mp3";
 
 export const useMusicStore = defineStore("music", {
   state: () => ({
     audio: null,
+
     playing: false,
+
+    duration: 0,
+    currentTime: 0,
+    progress: 0,
+
+    volume: Number(localStorage.getItem("music-volume") ?? 0.5),
   }),
 
   actions: {
@@ -15,7 +21,24 @@ export const useMusicStore = defineStore("music", {
       this.audio = new Audio(bgMusic);
 
       this.audio.loop = true;
-      this.audio.volume = 0.5;
+      this.audio.volume = this.volume;
+
+      this.audio.addEventListener("loadedmetadata", () => {
+        this.duration = this.audio.duration;
+      });
+
+      this.audio.addEventListener("timeupdate", () => {
+        this.currentTime = this.audio.currentTime;
+
+        if (this.duration > 0) {
+          this.progress =
+            (this.currentTime / this.duration) * 100;
+        }
+      });
+
+      this.audio.addEventListener("ended", () => {
+        this.playing = false;
+      });
     },
 
     async play() {
@@ -24,8 +47,8 @@ export const useMusicStore = defineStore("music", {
       try {
         await this.audio.play();
         this.playing = true;
-      } catch (error) {
-        console.warn("Autoplay diblokir browser:", error);
+      } catch (err) {
+        console.warn(err);
       }
     },
 
@@ -36,10 +59,29 @@ export const useMusicStore = defineStore("music", {
       this.playing = false;
     },
 
-    setVolume(volume) {
-      if (!this.audio) return;
+    toggle() {
+      if (this.playing) {
+        this.pause();
+      } else {
+        this.play();
+      }
+    },
 
-      this.audio.volume = volume;
+    setVolume(value) {
+      this.volume = value;
+
+      localStorage.setItem("music-volume", value);
+
+      if (this.audio) {
+        this.audio.volume = value;
+      }
+    },
+
+    seek(percent) {
+      if (!this.audio || !this.duration) return;
+
+      this.audio.currentTime =
+        (percent / 100) * this.duration;
     },
   },
 });
